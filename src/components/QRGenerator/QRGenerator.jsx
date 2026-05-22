@@ -2,20 +2,13 @@ import {
   useState,
   useEffect,
   useRef
-}
-
-from "react";
+} from "react";
 
 import {
   useLocation
-}
-
-from "react-router-dom";
+} from "react-router-dom";
 
 import axios from "axios";
-
-import html2canvas
-from "html2canvas";
 
 import FrameSelector
 from "../Frames/FrameSelector";
@@ -28,156 +21,164 @@ import "./QRGenerator.css";
 
 const QRGenerator = () => {
 
-  const location =
-  useLocation();
+const location =
+useLocation();
 
-  const qrDownloadRef =
-  useRef(null);
-
-
-  /* MAIN */
-
-  const [text,setText] =
-  useState("");
-
-  const [qrColor,
-  setQrColor] =
-  useState("#0f172a");
-
-  const [bgColor,
-  setBgColor] =
-  useState("#ffffff");
-
-  const [qrImage,
-  setQrImage] =
-  useState("");
-
-  const [loading,
-  setLoading] =
-  useState(false);
+const qrDownloadRef =
+useRef(null);
 
 
-  /* LOGO */
+/* MAIN */
 
-  const [addLogo,
-  setAddLogo] =
-  useState(false);
+const [text,setText] =
+useState("");
 
-  const [logoPreview,
-  setLogoPreview] =
-  useState("");
+const [qrColor,
+setQrColor] =
+useState("#0f172a");
 
-  const [selectedLogo,
-  setSelectedLogo] =
-  useState("");
+const [bgColor,
+setBgColor] =
+useState("#ffffff");
 
+const [qrImage,
+setQrImage] =
+useState("");
 
-  /* FRAME */
-
-  const [selectedFrame,
-  setSelectedFrame] =
-  useState("");
-
-  const [frameBgColor,
-  setFrameBgColor] =
-  useState("#0f172a");
-
-  const [frameTextColor,
-  setFrameTextColor] =
-  useState("#ffffff");
+const [loading,
+setLoading] =
+useState(false);
 
 
-  /* BUSINESS */
+/* LOGO */
 
-  const [businessTitle,
-  setBusinessTitle] =
-  useState("");
+const [addLogo,
+setAddLogo] =
+useState(false);
 
-  const [businessSubtitle,
-  setBusinessSubtitle] =
-  useState(
-  "Visit Today"
-  );
+const [logoPreview,
+setLogoPreview] =
+useState("");
 
-
-
-  useEffect(()=>{
-
-    if(
-      location.state
-      ?.templateText
-    ){
-
-      setText(
-
-      location.state
-      .templateText
-
-      );
-
-    }
+const [selectedLogo,
+setSelectedLogo] =
+useState("");
 
 
-    if(
-      location.state
-      ?.businessTitle
-    ){
+/* FRAME */
 
-      setBusinessTitle(
+const [selectedFrame,
+setSelectedFrame] =
+useState("");
 
-      location.state
-      .businessTitle
+const [
 
-      );
+showFrames,
 
-    }
+setShowFrames
 
-
-    if(
-      location.state
-      ?.businessSubtitle
-    ){
-
-      setBusinessSubtitle(
-
-      location.state
-      .businessSubtitle
-
-      );
-
-    }
-
-  },
-
-  [
-
-  location.state
-
-  ]);
+] = useState(
+false
+);
 
 
-  /* GENERATE */
+const [frameBgColor,
+setFrameBgColor] =
+useState("#0f172a");
 
-  const generateQR =
-  async()=>{
+const [frameTextColor,
+setFrameTextColor] =
+useState("#ffffff");
 
-    if(!text)
-    return;
 
-    try{
+/* BUSINESS */
 
-      setLoading(
-      true
-      );
+const [businessTitle,
+setBusinessTitle] =
+useState("");
 
-const response = await axios.post(
+const [businessSubtitle,
+setBusinessSubtitle] =
+useState(
+"Visit Today"
+);
+
+
+useEffect(()=>{
+
+if(
+location.state
+?.templateText
+){
+
+setText(
+location.state
+.templateText
+);
+
+}
+
+if(
+location.state
+?.businessTitle
+){
+
+setBusinessTitle(
+location.state
+.businessTitle
+);
+
+}
+
+if(
+location.state
+?.businessSubtitle
+){
+
+setBusinessSubtitle(
+location.state
+.businessSubtitle
+);
+
+}
+
+},
+
+[
+location.state
+]);
+
+
+/* GENERATE */
+
+const generateQR =
+async()=>{
+
+if(!text)
+return;
+
+try{
+
+setLoading(
+true
+);
+
+const response =
+
+await axios.post(
 
 `${import.meta.env.VITE_API_URL}/qr/generate`,
 
 {
+
 text,
-color: qrColor,
-background: bgColor
+
+color:
+qrColor,
+
+background:
+bgColor
+
 }
 
 );
@@ -188,159 +189,128 @@ setQrImage(
 
 );
 
-    }
+}
 
-    catch(error){
+catch(error){
 
-      console.log(
-      error
-      );
+console.log(
+error
+);
 
-    }
+}
 
-    finally{
+finally{
 
-      setLoading(
-      false
-      );
+setLoading(
+false
+);
 
-    }
+}
 
-  };
-
-
-
-  /* DOWNLOAD */
-
-  const downloadQR =
-  async()=>{
-
-    try{
-
-      if(
-      !qrDownloadRef
-      .current
-      )
-      return;
-
-
-      const canvas =
-
-      await html2canvas(
-
-      qrDownloadRef
-      .current,
-
-      {
-
-      backgroundColor:
-      null,
-
-      scale:3,
-
-      useCORS:
-      true,
-
-      allowTaint:
-      true
-
-      }
-
-      );
-
-
-      const image =
-
-      canvas.toDataURL(
-      "image/png"
-      );
-
-
-      const link =
-
-      document
-      .createElement(
-      "a"
-      );
-
-
-      link.href =
-      image;
-
-      link.download =
-
-      `qr-${
-      Date.now()
-      }.png`;
-
-
-      document.body
-      .appendChild(
-      link
-      );
-
-      link.click();
-
-      document.body
-      .removeChild(
-      link
-      );
-
-    }
-
-    catch(error){
-
-      console.log(
-      error
-      );
-
-    }
-
-  };
+};
 
 
 
-  /* CUSTOM LOGO */
+/* DOWNLOAD */
 
-  const handleLogoUpload =
-  (e)=>{
+const downloadQR =
+async()=>{
 
-    const file =
+try{
 
-    e.target
-    .files[0];
+if(!qrImage)
+return;
+
+const response =
+
+await fetch(
+qrImage
+);
+
+const blob =
+
+await response
+.blob();
+
+const url =
+
+window.URL
+.createObjectURL(
+blob
+);
+
+const link =
+
+document
+.createElement(
+"a"
+);
+
+link.href =
+url;
+
+link.download =
+
+`qr-${
+Date.now()
+}.png`;
+
+link.click();
+
+window.URL
+.revokeObjectURL(
+url
+);
+
+}
+
+catch(error){
+
+console.log(
+error
+);
+
+}
+
+};
 
 
-    if(file){
 
-      /* REMOVE PREBUILT */
+/* CUSTOM LOGO */
 
-      setSelectedLogo(
-      ""
-      );
+const handleLogoUpload =
+(e)=>{
+
+const file =
+
+e.target
+.files[0];
+
+if(file){
+
+setSelectedLogo(
+""
+);
+
+setLogoPreview(
+
+URL
+.createObjectURL(
+file
+)
+
+);
+
+}
+
+};
 
 
-      setLogoPreview(
-
-      URL
-      .createObjectURL(
-      file
-      )
-
-      );
-
-    }
-
-  };
-
-
-
-  return(
+return(
 
 <section
 className=
 "qr-generator-section">
-
 
 <div
 className=
@@ -359,7 +329,6 @@ Generate QR instantly
 </p>
 
 </div>
-
 
 
 <div
@@ -406,7 +375,6 @@ e.target.value
 </div>
 
 
-
 <div
 className=
 "input-group">
@@ -436,7 +404,6 @@ e.target.value
 />
 
 </div>
-
 
 
 <div
@@ -516,8 +483,6 @@ selectedLogo=
 
 setSelectedLogo={(logo)=>{
 
-/* REMOVE CUSTOM */
-
 setLogoPreview(
 ""
 );
@@ -564,6 +529,62 @@ onChange=
 
 
 
+<div
+className=
+"mobile-frame-section">
+
+<button
+
+className=
+"frame-toggle-btn"
+
+onClick={()=>
+
+setShowFrames(
+
+!showFrames
+
+)
+
+}
+
+>
+
+{
+
+showFrames
+
+?
+
+"Hide Frames"
+
+:
+
+"Add Frame"
+
+}
+
+</button>
+
+
+<div
+
+className={
+
+showFrames
+
+?
+
+"frame-wrapper show"
+
+:
+
+"frame-wrapper"
+
+}
+
+>
+
 <FrameSelector
 
 selectedFrame=
@@ -574,12 +595,15 @@ setSelectedFrame=
 
 />
 
+</div>
+
+</div>
+
 
 
 <div
 className=
 "qr-buttons">
-
 
 <button
 
@@ -632,7 +656,6 @@ Download QR
 className=
 "qr-preview-card">
 
-
 {
 
 qrImage ?
@@ -660,26 +683,19 @@ frameBgColor
 
 >
 
-
 {
 
 businessTitle && (
 
 <h2
-
 style={{
-
 color:
 frameTextColor
-
 }}
-
 >
 
 {
-
 businessTitle
-
 }
 
 </h2>
@@ -689,11 +705,9 @@ businessTitle
 }
 
 
-
 <div
 className=
 "qr-wrapper">
-
 
 <img
 
@@ -709,7 +723,6 @@ className=
 />
 
 
-
 {
 
 addLogo
@@ -719,9 +732,7 @@ addLogo
 (
 
 logoPreview
-
 ||
-
 selectedLogo
 
 )
@@ -731,11 +742,9 @@ selectedLogo
 <img
 
 src={
-
 logoPreview
 ||
 selectedLogo
-
 }
 
 alt=
@@ -753,26 +762,19 @@ className=
 </div>
 
 
-
 {
 
 businessTitle && (
 
 <p
-
 style={{
-
 color:
 frameTextColor
-
 }}
-
 >
 
 {
-
 businessSubtitle
-
 }
 
 </p>
