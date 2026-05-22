@@ -174,7 +174,7 @@ const QRGenerator = () => {
 
       await axios.post(
 
-      "http://127.0.0.1:8000/qr/generate",
+      "https://qrify-backend-a7vy.onrender.com",
 
       {
 
