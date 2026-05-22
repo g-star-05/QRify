@@ -16,7 +16,8 @@ const QRGenerator = () => {
   const [text, setText] = useState("");
   const [qrColor, setQrColor] = useState("#0f172a");
   const [bgColor, setBgColor] = useState("#ffffff");
-  const [qrImage, setQrImage] = useState("");
+  const [qrImage, setQrImage] = useState("");       // external URL (for display)
+  const [qrBase64, setQrBase64] = useState("");     // FIX: base64 version (for download)
   const [loading, setLoading] = useState(false);
 
   // Frame state
@@ -47,7 +48,7 @@ const QRGenerator = () => {
     }
   }, [location.state]);
 
-  // FIX 1: Clean up logo object URL on unmount to prevent memory leaks
+  // Clean up logo object URL on unmount to prevent memory leaks
   useEffect(() => {
     return () => {
       if (logoPreview) {
@@ -55,6 +56,25 @@ const QRGenerator = () => {
       }
     };
   }, [logoPreview]);
+
+  // FIX: Helper — fetch an image URL and convert it to a base64 data URL
+  // html2canvas cannot render cross-origin images unless they are base64
+  const toBase64 = (url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";  // request CORS headers from server
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        resolve(canvas.toDataURL("image/png"));
+      };
+      img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
+      img.src = url;
+    });
+  };
 
   // Generate QR code via API
   const generateQR = async () => {
@@ -72,14 +92,24 @@ const QRGenerator = () => {
         }
       );
 
-      // FIX 2: Guard against missing qr_url in response
       if (response.data?.qr_url) {
-        setQrImage(`${import.meta.env.VITE_API_URL}${response.data.qr_url}`);
+        const imageUrl = `${import.meta.env.VITE_API_URL}${response.data.qr_url}`;
+        setQrImage(imageUrl);
+
+        // FIX: Immediately convert QR image to base64 after generation
+        // so html2canvas can render it correctly during download
+        try {
+          const base64 = await toBase64(imageUrl);
+          setQrBase64(base64);
+        } catch (err) {
+          console.error("Failed to convert QR to base64:", err);
+          // Fall back to direct URL — download may still work if same origin
+          setQrBase64(imageUrl);
+        }
       } else {
         console.error("QR generation failed: qr_url missing in response", response.data);
       }
     } catch (error) {
-      // FIX 3: console.log → console.error for proper error reporting
       console.error("QR generation error:", error);
     } finally {
       setLoading(false);
@@ -90,7 +120,6 @@ const QRGenerator = () => {
   const handleLogoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // FIX 4: Revoke previous object URL before creating a new one
       if (logoPreview) {
         URL.revokeObjectURL(logoPreview);
       }
@@ -101,23 +130,27 @@ const QRGenerator = () => {
 
   // Download QR preview as PNG using html2canvas
   const downloadQR = async () => {
-    // FIX 5: Guard — also check qrImage exists before trying to download
     if (!qrDownloadRef.current || !qrImage) return;
 
     try {
-      const canvas = await html2canvas(qrDownloadRef.current, { scale: 3 });
+      const canvas = await html2canvas(qrDownloadRef.current, {
+        scale: 3,
+        useCORS: true,       // FIX: allow html2canvas to load cross-origin images
+        allowTaint: false,   // FIX: keep canvas clean (tainted canvas blocks toDataURL)
+        logging: false,
+      });
+
       const image = canvas.toDataURL("image/png");
       const link = document.createElement("a");
       link.href = image;
       link.download = `qr-${Date.now()}.png`;
       link.click();
     } catch (error) {
-      // FIX 6: downloadQR had no error handling at all — added try/catch
       console.error("QR download error:", error);
     }
   };
 
-  // FIX 7: Extracted logo src logic into a variable for cleaner JSX
+  // Active logo source — uploaded file takes priority over selected preset
   const activeLogo = logoPreview || selectedLogo;
 
   return (
@@ -240,6 +273,11 @@ const QRGenerator = () => {
         </div>
 
         {/* Preview Panel */}
+        {/* 
+          FIX: The preview div uses qrBase64 (not qrImage) for the QR <img> src.
+          This ensures html2canvas can always read the image pixels without
+          cross-origin blocking, so the downloaded PNG includes the QR code.
+        */}
         <div className="qr-preview-card">
           <div
             ref={qrDownloadRef}
@@ -253,8 +291,12 @@ const QRGenerator = () => {
 
             {/* QR image + optional logo overlay */}
             <div className="qr-wrapper">
-              {qrImage && (
-                <img src={qrImage} alt="QR Code" className="qr-image" />
+              {qrBase64 && (
+                <img
+                  src={qrBase64}       // FIX: use base64 src so html2canvas captures it
+                  alt="QR Code"
+                  className="qr-image"
+                />
               )}
               {addLogo && activeLogo && (
                 <img
