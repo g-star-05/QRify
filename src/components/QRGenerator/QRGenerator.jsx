@@ -170,7 +170,7 @@ const QRGenerator = () => {
       true
       );
 
- const response = await axios.post(
+const response = await axios.post(
 
 `${import.meta.env.VITE_API_URL}/qr/generate`,
 
@@ -179,11 +179,12 @@ text,
 color: qrColor,
 background: bgColor
 }
+
 );
 
 setQrImage(
 
-`https://qrify-backend-a7vy.onrender.com${response.data.qr_url}`
+`${import.meta.env.VITE_API_URL}${response.data.qr_url}`
 
 );
 
