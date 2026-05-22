@@ -1,11 +1,8 @@
 import "./FrameSelector.css";
 
 import {
-
 frames
-
 }
-
 from "./framesData";
 
 
@@ -15,10 +12,14 @@ selectedFrame,
 
 setSelectedFrame
 
-}) => {
+})=>{
 
-const handleFrameClick =
-(frameClass)=>{
+
+const handleFrameClick = (
+
+frameClass
+
+)=>{
 
 if(
 
@@ -28,8 +29,6 @@ frameClass
 
 ){
 
-/* DESELECT */
-
 setSelectedFrame(
 ""
 );
@@ -37,8 +36,6 @@ setSelectedFrame(
 }
 
 else{
-
-/* SELECT */
 
 setSelectedFrame(
 
@@ -51,22 +48,49 @@ frameClass
 };
 
 
+
 return(
 
 <div
 className=
 "frame-selector">
 
+<div
+className=
+"frame-header">
+
 <h3>
 
-Frames
+Choose Frame
 
 </h3>
+
+<span>
+
+{
+
+selectedFrame
+
+?
+
+"1 Selected"
+
+:
+
+"Optional"
+
+}
+
+</span>
+
+</div>
+
 
 
 <div
 className=
 "frame-grid">
+
 
 {
 
@@ -109,12 +133,27 @@ frame.className
 >
 
 <div
+
+className={
+
+`frame-preview
+
+${frame.className}`
+
+}
+
+>
+
+<div
 className=
-"frame-preview">
+"mini-qr">
 
 □
 
 </div>
+
+</div>
+
 
 
 <p>
@@ -126,6 +165,27 @@ frame.name
 }
 
 </p>
+
+
+{
+
+selectedFrame===
+
+frame.className
+
+&&(
+
+<div
+className=
+"selected-badge">
+
+✓
+
+</div>
+
+)
+
+}
 
 </div>
 

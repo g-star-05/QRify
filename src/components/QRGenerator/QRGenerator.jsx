@@ -1,14 +1,18 @@
 import {
-  useState,
-  useEffect,
-  useRef
-} from "react";
+useState,
+useEffect,
+useRef
+}
+from "react";
 
 import {
-  useLocation
-} from "react-router-dom";
+useLocation
+}
+from "react-router-dom";
 
 import axios from "axios";
+
+import html2canvas from "html2canvas";
 
 import FrameSelector
 from "../Frames/FrameSelector";
@@ -19,7 +23,7 @@ from "../LogoSelector/LogoSelector";
 import "./QRGenerator.css";
 
 
-const QRGenerator = () => {
+const QRGenerator = ()=>{
 
 const location =
 useLocation();
@@ -35,7 +39,7 @@ useState("");
 
 const [qrColor,
 setQrColor] =
-useState("#0f172a");
+useState("#111827");
 
 const [bgColor,
 setBgColor] =
@@ -71,20 +75,14 @@ const [selectedFrame,
 setSelectedFrame] =
 useState("");
 
-const [
-
-showFrames,
-
-setShowFrames
-
-] = useState(
-false
-);
+const [showFrames,
+setShowFrames] =
+useState(false);
 
 
 const [frameBgColor,
 setFrameBgColor] =
-useState("#0f172a");
+useState("#071126");
 
 const [frameTextColor,
 setFrameTextColor] =
@@ -99,51 +97,43 @@ useState("");
 
 const [businessSubtitle,
 setBusinessSubtitle] =
-useState(
-"Visit Today"
-);
+useState("Visit Today");
+
 
 
 useEffect(()=>{
 
 if(
-location.state
-?.templateText
+location.state?.templateText
 ){
 
 setText(
-location.state
-.templateText
+location.state.templateText
 );
 
 }
 
 if(
-location.state
-?.businessTitle
+location.state?.businessTitle
 ){
 
 setBusinessTitle(
-location.state
-.businessTitle
+location.state.businessTitle
 );
 
 }
 
 if(
-location.state
-?.businessSubtitle
+location.state?.businessSubtitle
 ){
 
 setBusinessSubtitle(
-location.state
-.businessSubtitle
+location.state.businessSubtitle
 );
 
 }
 
 },
-
 [
 location.state
 ]);
@@ -164,7 +154,6 @@ true
 );
 
 const response =
-
 await axios.post(
 
 `${import.meta.env.VITE_API_URL}/qr/generate`,
@@ -216,38 +205,44 @@ false
 const downloadQR =
 async()=>{
 
-try{
-
-if(!qrImage)
+if(
+!qrDownloadRef.current
+)
 return;
 
-const response =
+try{
 
-await fetch(
-qrImage
+const canvas =
+
+await html2canvas(
+
+qrDownloadRef.current,
+
+{
+
+scale:3,
+
+useCORS:true,
+
+backgroundColor:null
+
+}
+
 );
 
-const blob =
+const image =
 
-await response
-.blob();
-
-const url =
-
-window.URL
-.createObjectURL(
-blob
+canvas.toDataURL(
+"image/png"
 );
 
 const link =
-
-document
-.createElement(
+document.createElement(
 "a"
 );
 
 link.href =
-url;
+image;
 
 link.download =
 
@@ -256,11 +251,6 @@ Date.now()
 }.png`;
 
 link.click();
-
-window.URL
-.revokeObjectURL(
-url
-);
 
 }
 
@@ -276,15 +266,11 @@ error
 
 
 
-/* CUSTOM LOGO */
-
 const handleLogoUpload =
 (e)=>{
 
 const file =
-
-e.target
-.files[0];
+e.target.files[0];
 
 if(file){
 
@@ -294,8 +280,7 @@ setSelectedLogo(
 
 setLogoPreview(
 
-URL
-.createObjectURL(
+URL.createObjectURL(
 file
 )
 
@@ -304,6 +289,7 @@ file
 }
 
 };
+
 
 
 return(
@@ -318,17 +304,18 @@ className=
 
 <h1>
 
-Create Your QR Code
+Create Your QR
 
 </h1>
 
 <p>
 
-Generate QR instantly
+Professional QR Generator
 
 </p>
 
 </div>
+
 
 
 <div
@@ -341,26 +328,16 @@ className=
 "qr-form">
 
 
-<div
-className=
-"input-group">
-
-<label>
-
-URL Or Text
-
-</label>
-
 <input
 
 type=
 "text"
 
+placeholder=
+"Enter URL"
+
 value=
 {text}
-
-placeholder=
-"https://example.com"
 
 onChange={(e)=>
 
@@ -372,12 +349,7 @@ e.target.value
 
 />
 
-</div>
 
-
-<div
-className=
-"input-group">
 
 <label>
 
@@ -403,12 +375,6 @@ e.target.value
 
 />
 
-</div>
-
-
-<div
-className=
-"input-group">
 
 <label>
 
@@ -434,13 +400,7 @@ e.target.value
 
 />
 
-</div>
 
-
-
-<div
-className=
-"logo-option">
 
 <label>
 
@@ -466,8 +426,6 @@ Add Logo
 
 </label>
 
-</div>
-
 
 
 {
@@ -481,30 +439,11 @@ addLogo && (
 selectedLogo=
 {selectedLogo}
 
-setSelectedLogo={(logo)=>{
-
-setLogoPreview(
-""
-);
-
-setSelectedLogo(
-logo
-);
-
-}}
+setSelectedLogo=
+{setSelectedLogo}
 
 />
 
-
-<div
-className=
-"input-group">
-
-<label>
-
-Custom Logo
-
-</label>
 
 <input
 
@@ -518,8 +457,6 @@ onChange=
 {handleLogoUpload}
 
 />
-
-</div>
 
 </>
 
@@ -567,23 +504,9 @@ showFrames
 </button>
 
 
-<div
+{
 
-className={
-
-showFrames
-
-?
-
-"frame-wrapper show"
-
-:
-
-"frame-wrapper"
-
-}
-
->
+showFrames && (
 
 <FrameSelector
 
@@ -595,7 +518,9 @@ setSelectedFrame=
 
 />
 
-</div>
+)
+
+}
 
 </div>
 
@@ -652,6 +577,7 @@ Download QR
 
 
 
+
 <div
 className=
 "qr-preview-card">
@@ -703,6 +629,7 @@ businessTitle
 )
 
 }
+
 
 
 <div
@@ -762,9 +689,10 @@ className=
 </div>
 
 
+
 {
 
-businessTitle && (
+businessSubtitle && (
 
 <p
 style={{
@@ -794,7 +722,6 @@ businessSubtitle
 <p>
 
 Generate QR
-to preview
 
 </p>
 
@@ -803,9 +730,12 @@ to preview
 }
 
 
-<h3>
 
-QR Preview
+<h3
+className=
+"preview-title">
+
+Live Preview
 
 </h3>
 

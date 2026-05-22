@@ -4,46 +4,39 @@
 
 .qr-generator-section{
 
-padding:100px 8%;
+padding:80px 6%;
 
 min-height:100vh;
 
 background:
-
 linear-gradient(
-
-to bottom right,
-
+135deg,
 #f8fafc,
-
 #e2e8f0
-
 );
 
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .qr-generator-header{
 
 text-align:center;
 
-margin-bottom:70px;
+margin-bottom:50px;
 
 }
 
 .qr-generator-header h1{
 
-font-size:58px;
+font-size:52px;
 
 font-weight:800;
 
 color:#0f172a;
 
-margin-bottom:18px;
+margin-bottom:12px;
 
 }
 
@@ -56,9 +49,7 @@ color:#64748b;
 }
 
 
-/* =========================
-   GRID
-========================= */
+/* GRID */
 
 .qr-generator-container{
 
@@ -67,44 +58,29 @@ display:grid;
 grid-template-columns:
 1fr 1fr;
 
-gap:60px;
+gap:40px;
 
 align-items:start;
 
 }
 
 
-/* =========================
-   FORM
-========================= */
+/* FORM */
 
 .qr-form{
 
 background:white;
 
-padding:45px;
+padding:35px;
 
-border-radius:30px;
-
-border:
-
-1px solid #e2e8f0;
+border-radius:28px;
 
 box-shadow:
-
-0 20px 50px
-
-rgba(
-0,
-0,
-0,
-0.08
+0 20px 50px rgba(
+0,0,0,.08
 );
 
 }
-
-
-/* INPUTS */
 
 .input-group{
 
@@ -112,112 +88,55 @@ display:flex;
 
 flex-direction:column;
 
-margin-bottom:25px;
+margin-bottom:22px;
 
 }
 
 .input-group label{
 
-font-size:16px;
-
 font-weight:600;
 
-color:#0f172a;
-
-margin-bottom:10px;
+margin-bottom:8px;
 
 }
 
 .input-group input[type="text"]{
 
-padding:16px;
+padding:15px;
 
 border-radius:14px;
 
 border:
-
 1px solid #cbd5e1;
-
-font-size:16px;
 
 outline:none;
 
-transition:.3s;
-
-}
-
-.input-group input[type="text"]:focus{
-
-border-color:#38bdf8;
-
-box-shadow:
-
-0 0 0 4px
-
-rgba(
-56,
-189,
-248,
-0.15
-);
+font-size:15px;
 
 }
 
 .input-group input[type="color"]{
 
-width:90px;
+width:80px;
 
-height:55px;
+height:50px;
 
 border:none;
 
 background:transparent;
 
-cursor:pointer;
-
-}
-
-.input-group input[type="file"]{
-
-padding:10px;
-
 }
 
 
-/* =========================
-   OPTIONS
-========================= */
-
-.logo-option{
-
-margin-bottom:25px;
-
-}
-
-.logo-option label{
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-font-weight:600;
-
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 
 .qr-buttons{
 
 display:flex;
 
-gap:20px;
+gap:14px;
 
-margin-top:35px;
+margin-top:24px;
 
 }
 
@@ -232,19 +151,17 @@ border:none;
 
 border-radius:16px;
 
-cursor:pointer;
-
-font-size:16px;
+font-size:15px;
 
 font-weight:700;
 
-transition:.3s;
+cursor:pointer;
 
 }
 
 .generate-btn{
 
-background:#0f172a;
+background:#071126;
 
 color:white;
 
@@ -258,121 +175,73 @@ color:white;
 
 }
 
-.generate-btn:hover,
-.download-btn:hover{
 
-transform:
-translateY(-4px);
-
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
+/* PREVIEW CARD */
 
 .qr-preview-card{
 
-background:
+background:white;
 
-linear-gradient(
-
-to bottom right,
-
-#081226,
-
-#1e293b
-
-);
-
-padding:60px;
-
-border-radius:32px;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-min-height:580px;
-
-color:white;
-
-box-shadow:
-
-0 25px 60px
-
-rgba(
-15,
-23,
-42,
-0.25
-);
-
-}
-
-.qr-preview-card h3{
-
-font-size:34px;
-
-margin-top:25px;
-
-}
-
-
-/* =========================
-   QR FRAME
-========================= */
-
-.qr-frame{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-gap:22px;
-
-padding:30px;
+padding:24px;
 
 border-radius:30px;
 
-min-width:340px;
+display:flex;
 
-}
+flex-direction:column;
 
-.qr-frame h2{
+align-items:center;
 
-font-size:30px;
+justify-content:center;
 
-font-weight:700;
+box-shadow:
+0 15px 45px rgba(
+0,0,0,.08
+);
 
-text-align:center;
-
-margin:0;
-
-}
-
-.qr-frame p{
-
-font-size:18px;
-
-text-align:center;
-
-margin:0;
+overflow:hidden;
 
 }
 
 
-/* =========================
-   QR
-========================= */
+/* FRAME */
+
+.qr-frame{
+
+width:100%;
+
+max-width:360px;
+
+background:
+linear-gradient(
+135deg,
+#071126,
+#111c35
+);
+
+padding:26px;
+
+border-radius:30px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+gap:18px;
+
+box-shadow:
+0 20px 45px rgba(
+0,0,0,.25
+);
+
+}
+
+
+/* QR BOX */
 
 .qr-wrapper{
 
@@ -384,28 +253,46 @@ justify-content:center;
 
 align-items:center;
 
+padding:18px;
+
+border-radius:24px;
+
+background:
+rgba(
+255,
+255,
+255,
+0.03
+);
+
 }
+
+
+/* QR */
 
 .qr-image{
 
-width:260px;
+width:220px;
 
-height:260px;
+height:220px;
 
 background:white;
 
-padding:20px;
+padding:14px;
 
-border-radius:26px;
+border-radius:22px;
 
-object-fit:cover;
+object-fit:contain;
+
+box-shadow:
+0 10px 25px rgba(
+0,0,0,.18
+);
 
 }
 
 
-/* =========================
-   LOGO
-========================= */
+/* LOGO */
 
 .qr-center-logo{
 
@@ -416,19 +303,14 @@ top:50%;
 left:50%;
 
 transform:
-
 translate(
 -50%,
 -50%
 );
 
-width:72px;
+width:54px;
 
-height:72px;
-
-object-fit:cover;
-
-object-position:center;
+height:54px;
 
 border-radius:50%;
 
@@ -437,108 +319,109 @@ background:white;
 padding:6px;
 
 border:
-6px solid white;
+4px solid white;
 
-box-shadow:
-
-0 10px 25px
-
-rgba(
-0,
-0,
-0,
-0.18
-);
-
-overflow:hidden;
-
-z-index:10;
-
-display:block;
+object-fit:cover;
 
 }
 
 
-/* =========================
-   FRAME STYLES
-========================= */
+/* TEXT */
+
+.qr-frame h2{
+
+font-size:24px;
+
+font-weight:700;
+
+margin:0;
+
+text-align:center;
+
+}
+
+.qr-frame p{
+
+font-size:15px;
+
+margin:0;
+
+text-align:center;
+
+opacity:.9;
+
+}
+
+
+.preview-title{
+
+margin-top:18px;
+
+font-size:18px;
+
+font-weight:700;
+
+color:#0f172a;
+
+}
+
+
+/* FRAME STYLES */
 
 .frame-classic{
 
 border:
-6px solid white;
+5px solid white;
 
 }
 
 .frame-rounded{
 
 border:
-5px solid white;
+4px solid white;
 
-border-radius:42px;
+border-radius:40px;
 
 }
 
 .frame-scan{
 
 border:
-5px dashed white;
+4px dashed white;
 
 }
 
 .frame-circle{
 
 border:
-5px solid white;
+4px solid white;
 
 border-radius:50%;
 
-padding:40px;
+padding:34px;
 
 }
 
 .frame-business{
 
 border:
-5px solid gold;
-
-box-shadow:
-
-0 12px 30px
-
-rgba(
-255,
-215,
-0,
-0.25
-);
+4px solid gold;
 
 }
 
 .frame-modern{
 
 backdrop-filter:
-blur(10px);
-
-box-shadow:
-
-0 15px 35px
-
-rgba(
-255,
-255,
-255,
-0.18
-);
+blur(12px);
 
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* MOBILE */
 
-@media(max-width:1000px){
+@media(
+max-width:900px
+){
 
 .qr-generator-container{
 
@@ -549,110 +432,30 @@ grid-template-columns:
 
 }
 
-@media(max-width:768px){
 
-.qr-generator-section{
-
-padding:80px 5%;
-
-}
-
-.qr-buttons{
-
-flex-direction:column;
-
-}
-
-.qr-image{
-
-width:220px;
-
-height:220px;
-
-}
-
-.qr-center-logo{
-
-width:60px;
-
-height:60px;
-
-}
-
-.qr-generator-header h1{
-
-font-size:42px;
-
-}
-
-}
-
-@media(max-width:500px){
-
-.qr-generator-header h1{
-
-font-size:34px;
-
-}
-
-.qr-image{
-
-width:180px;
-
-height:180px;
-
-}
-
-.qr-center-logo{
-
-width:55px;
-
-height:55px;
-
-}
-
-.qr-preview-card{
-
-padding:40px 20px;
-
-}
-
-}
-
-/* =========================
-   PROFESSIONAL MOBILE VIEW
-========================= */
-
-@media (max-width:768px){
-
-/* MAIN LAYOUT */
+@media(
+max-width:768px
+){
 
 .qr-generator-section{
 
 padding:20px 12px;
 
-overflow:hidden;
+}
+
+.qr-generator-header h1{
+
+font-size:30px;
 
 }
 
-.qr-generator-container{
+.qr-generator-header p{
 
-display:flex;
-
-flex-direction:column;
-
-gap:24px;
-
-padding:0;
+font-size:14px;
 
 }
-
-
-/* FORM */
 
 .qr-form{
-
-width:100%;
 
 padding:20px;
 
@@ -660,67 +463,57 @@ border-radius:22px;
 
 }
 
-.input-group{
-
-margin-bottom:18px;
-
-}
-
-.input-group input{
-
-width:100%;
-
-font-size:15px;
-
-padding:14px;
-
-}
-
-
-/* BUTTONS */
-
 .qr-buttons{
 
-display:flex;
-
 flex-direction:column;
-
-gap:12px;
-
-margin-top:18px;
 
 }
 
 .generate-btn,
-
 .download-btn,
-
 .frame-toggle-btn{
 
 width:100%;
 
-padding:15px;
+}
 
-border-radius:14px;
+.qr-preview-card{
 
-font-size:15px;
+padding:18px;
 
 }
 
+.qr-frame{
 
-/* FRAME UX */
+max-width:300px;
 
-.frame-toggle-btn{
+padding:20px;
 
-display:block;
+border-radius:24px;
 
-background:#0f172a;
+}
 
-color:white;
+.qr-image{
 
-border:none;
+width:170px;
 
-font-weight:600;
+height:170px;
+
+padding:10px;
+
+}
+
+.qr-center-logo{
+
+width:45px;
+
+height:45px;
+
+}
+
+.preview-title{
+
+font-size:15px;
 
 }
 
@@ -728,9 +521,7 @@ font-weight:600;
 
 display:none;
 
-margin-top:15px;
-
-animation:fade .3s ease;
+margin-top:12px;
 
 }
 
@@ -740,164 +531,26 @@ display:block;
 
 }
 
-.frame-selector{
-
-max-height:260px;
-
-overflow-y:auto;
-
-padding-right:5px;
-
 }
 
 
-/* PREVIEW CARD */
-
-.qr-preview-card{
-
-width:100%;
-
-padding:22px 16px;
-
-border-radius:28px;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-overflow:hidden;
-
-}
-
-
-/* PREVIEW FRAME */
+@media(
+max-width:480px
+){
 
 .qr-frame{
 
-width:100%;
-
-max-width:320px;
-
-padding:18px;
-
-border-radius:26px;
-
-margin:auto;
-
-}
-
-
-/* QR IMAGE */
-
-.qr-wrapper{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-position:relative;
-
-}
-
-.qr-image{
-
-width:100%;
-
-max-width:220px;
-
-height:auto;
-
-object-fit:contain;
-
-border-radius:18px;
-
-}
-
-
-/* CENTER LOGO */
-
-.qr-center-logo{
-
-width:55px;
-
-height:55px;
-
-border-radius:50%;
-
-padding:8px;
-
-}
-
-
-/* BUSINESS TEXT */
-
-.qr-frame h2{
-
-font-size:20px;
-
-text-align:center;
-
-margin-top:14px;
-
-}
-
-.qr-frame p{
-
-font-size:14px;
-
-text-align:center;
-
-}
-
-
-/* HEADER */
-
-.qr-generator-header h1{
-
-font-size:28px;
-
-text-align:center;
-
-}
-
-.qr-generator-header p{
-
-font-size:14px;
-
-text-align:center;
-
-}
-
-}
-
-
-/* SMALL DEVICES */
-
-@media(max-width:480px){
-
-.qr-image{
-
-max-width:180px;
-
-}
-
-.qr-frame{
-
-max-width:280px;
+max-width:270px;
 
 padding:16px;
 
 }
 
-.qr-preview-card{
+.qr-image{
 
-padding:18px;
+width:150px;
+
+height:150px;
 
 }
 
