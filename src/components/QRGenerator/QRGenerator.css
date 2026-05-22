@@ -1,540 +1,334 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.qr-generator-section{
+/* ─── SECTION ─────────────────────────────────────── */
 
-padding:60px 6%;
-
-background:
-
-linear-gradient(
-135deg,
-#f8fafc,
-#e2e8f0
-);
-
-min-height:100vh;
-
+.qr-generator-section {
+  padding: 60px 6%;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  min-height: 100vh;
 }
 
+/* ─── HEADER ──────────────────────────────────────── */
 
-/* HEADER */
-
-.qr-generator-header{
-
-margin-bottom:40px;
-
+.qr-generator-header {
+  margin-bottom: 40px;
 }
 
-.qr-generator-header h1{
-
-font-size:56px;
-
-font-weight:800;
-
-color:#020617;
-
+.qr-generator-header h1 {
+  font-size: 56px;
+  font-weight: 800;
+  color: #020617;
 }
 
-.qr-generator-header p{
-
-font-size:20px;
-
-color:#64748b;
-
-margin-top:8px;
-
+.qr-generator-header p {
+  font-size: 20px;
+  color: #64748b;
+  margin-top: 8px;
 }
 
+/* ─── MAIN GRID ───────────────────────────────────── */
 
-/* MAIN */
-
-.qr-generator-container{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:40px;
-
-align-items:start;
-
+.qr-generator-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
 }
 
-
-/* CARD */
+/* ─── CARDS ───────────────────────────────────────── */
 
 .qr-form,
-.qr-preview-card{
-
-background:white;
-
-padding:35px;
-
-border-radius:32px;
-
-box-shadow:
-
-0 15px 40px
-
-rgba(
-15,
-23,
-42,
-0.08
-);
-
+.qr-preview-card {
+  background: white;
+  padding: 35px;
+  border-radius: 32px;
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
 }
 
+/* ─── INPUT ───────────────────────────────────────── */
 
-/* INPUT */
-
-.input-group{
-
-margin-bottom:22px;
-
+.input-group {
+  margin-bottom: 22px;
 }
 
-.input-group input{
-
-width:100%;
-
-padding:18px;
-
-border-radius:20px;
-
-border:2px solid
-#e2e8f0;
-
-font-size:16px;
-
-outline:none;
-
-transition:.3s;
-
+.input-group input {
+  width: 100%;
+  padding: 18px;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
 }
 
-.input-group input:focus{
-
-border-color:
-#38bdf8;
-
+.input-group input:focus {
+  border-color: #38bdf8;
 }
 
+/* ─── COLOR PICKERS ───────────────────────────────── */
 
-/* COLOR */
-
-.color-picker-row{
-
-display:grid;
-
-grid-template-columns:
-1fr 1fr;
-
-gap:18px;
-
-margin:20px 0;
-
+.color-picker-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 20px 0;
 }
 
-.color-box{
-
-background:
-
-linear-gradient(
-135deg,
-#f8fafc,
-#eef2ff
-);
-
-padding:18px;
-
-border-radius:22px;
-
-display:flex;
-
-justify-content:
-space-between;
-
-align-items:center;
-
-border:
-1px solid
-#e2e8f0;
-
+.color-box {
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  padding: 18px;
+  border-radius: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
 }
 
-.color-box label{
-
-font-size:15px;
-
-font-weight:700;
-
-color:#0f172a;
-
+.color-box label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
-.color-box input{
-
-width:55px;
-
-height:55px;
-
-border:none;
-
-border-radius:50%;
-
-cursor:pointer;
-
-overflow:hidden;
-
-background:none;
-
+.color-box input[type="color"] {
+  width: 55px;
+  height: 55px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  overflow: hidden;
+  background: none;
+  padding: 0;        /* FIX: some browsers add padding to color inputs */
 }
 
+/* ─── LOGO TOGGLE ─────────────────────────────────── */
 
-/* LOGO */
-
-.logo-option{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-margin:22px 0;
-
-font-size:17px;
-
-font-weight:600;
-
+.logo-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;   /* FIX: make whole label feel clickable */
 }
 
-.logo-option input{
-
-width:18px;
-
-height:18px;
-
+.logo-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
 
-
-/* BUTTONS */
+/* ─── BUTTONS ─────────────────────────────────────── */
 
 .frame-toggle-btn,
 .generate-btn,
-.download-btn{
-
-width:100%;
-
-padding:18px;
-
-border:none;
-
-border-radius:22px;
-
-font-size:17px;
-
-font-weight:700;
-
-cursor:pointer;
-
-margin-top:18px;
-
-transition:.3s;
-
+.download-btn {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 22px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
-.frame-toggle-btn{
-
-background:#f1f5f9;
-
-color:#0f172a;
-
+.frame-toggle-btn {
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
-.generate-btn{
-
-background:#020617;
-
-color:white;
-
+.frame-toggle-btn:hover {
+  background: #e2e8f0;    /* FIX: added hover state for frame button too */
 }
 
-.download-btn{
+.generate-btn {
+  background: #020617;
+  color: white;
+}
 
-background:#38bdf8;
-
-color:white;
-
+.download-btn {
+  background: #38bdf8;
+  color: white;
 }
 
 .generate-btn:hover,
-.download-btn:hover{
-
-transform:
-translateY(-3px);
-
+.download-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.92;           /* FIX: added opacity on hover for better feel */
 }
 
+/* ─── PREVIEW CARD ────────────────────────────────── */
 
-/* PREVIEW */
-
-.qr-preview-card{
-
-text-align:center;
-
+.qr-preview-card {
+  text-align: center;
 }
 
-
-.qr-frame{
-
-width:100%;
-
-max-width:360px;
-
-min-height:360px;
-
-margin:auto;
-
-border-radius:38px;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-padding:30px;
-
-position:relative;
-
-overflow:hidden;
-
-box-shadow:
-
-0 20px 40px
-
-rgba(
-0,
-0,
-0,
-0.12
-);
-
+.qr-frame {
+  width: 100%;
+  max-width: 360px;
+  min-height: 360px;
+  margin: auto;
+  border-radius: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
+/* ─── QR IMAGE ────────────────────────────────────── */
 
-/* QR */
-
-.qr-wrapper{
-
-position:relative;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
+.qr-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.qr-image{
-
-width:190px;
-
-height:190px;
-
-padding:14px;
-
-background:white;
-
-border-radius:28px;
-
-object-fit:cover;
-
+.qr-image {
+  width: 190px;
+  height: 190px;
+  padding: 14px;
+  background: white;
+  border-radius: 28px;
+  object-fit: cover;
+  display: block;            /* FIX: removes inline image gap */
 }
 
+/* ─── CENTER LOGO (CIRCULAR) ──────────────────────── */
 
-/* LOGO CENTER */
+/*
+  FIX: Removed border-radius from the img tag directly.
+  html2canvas ignores border-radius on <img> elements,
+  causing the logo to appear square in downloads.
 
-.qr-center-logo{
+  Solution: use a wrapper <div> with border-radius + overflow:hidden.
+  html2canvas correctly clips the div, keeping the logo
+  circular in BOTH the live preview and the downloaded PNG.
+*/
 
-position:absolute;
-
-width:58px;
-
-height:58px;
-
-object-fit:cover;
-
-border-radius:50%;
-
-background:white;
-
-padding:6px;
-
-box-shadow:
-
-0 8px 18px
-
-rgba(
-0,
-0,
-0,
-0.15
-);
-
+.qr-center-logo-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;          /* circle shape */
+  overflow: hidden;            /* clips child img into a circle */
+  border: 3px solid white;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  background: white;
 }
 
-
-/* BUSINESS */
-
-.qr-frame h2{
-
-font-size:24px;
-
-font-weight:800;
-
-margin-bottom:18px;
-
-text-align:center;
-
+.qr-center-logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* No border-radius here — parent div handles the clipping */
 }
 
-.qr-frame p{
+/* ─── BUSINESS TITLE / SUBTITLE ───────────────────── */
 
-font-size:15px;
-
-margin-top:18px;
-
-text-align:center;
-
+.qr-frame h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
-
-/* TITLE */
-
-.preview-title{
-
-margin-top:30px;
-
-font-size:34px;
-
-font-weight:800;
-
-color:#0f172a;
-
+.qr-frame p {
+  font-size: 15px;
+  margin-top: 18px;
+  text-align: center;
 }
 
+/* ─── PREVIEW TITLE ───────────────────────────────── */
 
-/* MOBILE */
-
-@media(
-max-width:768px
-){
-
-.qr-generator-section{
-
-padding:40px 5%;
-
+.preview-title {
+  margin-top: 30px;
+  font-size: 34px;
+  font-weight: 800;
+  color: #0f172a;
 }
 
-.qr-generator-container{
+/* ─── RESPONSIVE: TABLET (≤ 768px) ───────────────── */
 
-grid-template-columns:
-1fr;
+@media (max-width: 768px) {
+  .qr-generator-section {
+    padding: 40px 5%;
+  }
 
-gap:30px;
+  .qr-generator-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 
+  .qr-generator-header h1 {
+    font-size: 42px;
+  }
+
+  .color-picker-row {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-form,
+  .qr-preview-card {
+    padding: 25px;
+  }
+
+  .qr-frame {
+    max-width: 100%;
+    min-height: 300px;
+    padding: 20px;
+  }
+
+  .qr-image {
+    width: 165px;
+    height: 165px;
+  }
+
+  .preview-title {
+    font-size: 28px;
+  }
 }
 
-.qr-generator-header h1{
+/* ─── RESPONSIVE: MOBILE (≤ 480px) ───────────────── */
 
-font-size:42px;
+@media (max-width: 480px) {
+  .qr-generator-header h1 {
+    font-size: 34px;
+  }
 
-}
+  .qr-frame {
+    min-height: 260px;
+    border-radius: 30px;
+  }
 
-.color-picker-row{
+  .qr-image {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+  }
 
-grid-template-columns:
-1fr;
+  .color-box {
+    padding: 15px;
+  }
 
-}
-
-.qr-form,
-.qr-preview-card{
-
-padding:25px;
-
-}
-
-.qr-frame{
-
-max-width:100%;
-
-min-height:300px;
-
-padding:20px;
-
-}
-
-.qr-image{
-
-width:165px;
-
-height:165px;
-
-}
-
-.preview-title{
-
-font-size:28px;
-
-}
-
-}
-
-
-@media(
-max-width:480px
-){
-
-.qr-generator-header h1{
-
-font-size:34px;
-
-}
-
-.qr-frame{
-
-min-height:260px;
-
-border-radius:30px;
-
-}
-
-.qr-image{
-
-width:150px;
-
-height:150px;
-
-padding:10px;
-
-}
-
-.color-box{
-
-padding:15px;
-
-}
-
+  .qr-center-logo-wrapper {
+    width: 48px;        /* FIX: scale down logo on small screens */
+    height: 48px;
+  }
 }
