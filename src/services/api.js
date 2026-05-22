@@ -3,7 +3,8 @@ import axios from "axios";
 const API = axios.create({
 
 baseURL:
-"https://qrify-backend-a7vy.onrender.com"
+
+import.meta.env.VITE_API_URL
 
 });
 
