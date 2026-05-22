@@ -192,13 +192,8 @@ const QRGenerator = () => {
 
 
       setQrImage(
-
-      `http://127.0.0.1:8000${
-      response.data
-      .image_url
-      }`
-
-      );
+`https://qrify-backend-a7vy.onrender.com${response.data.qr_url}`
+);
 
     }
 
