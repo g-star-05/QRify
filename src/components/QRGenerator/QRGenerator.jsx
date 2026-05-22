@@ -170,29 +170,26 @@ const QRGenerator = () => {
       true
       );
 
-      const response =
+ const response = await axios.post(
 
-      await axios.post(
+"https://qrify-backend-a7vy.onrender.com/qr/generate",
 
-      "https://qrify-backend-a7vy.onrender.com/qr/generate",
+{
 
-      {
+text,
 
-      text,
+color: qrColor,
 
-      color:
-      qrColor,
+background: bgColor
 
-      background:
-      bgColor
+}
 
-      }
+);
 
-      );
+setQrImage(
 
-
-      setQrImage(
 `https://qrify-backend-a7vy.onrender.com${response.data.qr_url}`
+
 );
 
     }
