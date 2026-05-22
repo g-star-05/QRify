@@ -74,7 +74,7 @@ useState("");
 
 const [businessSubtitle,
 setBusinessSubtitle]=
-useState("Visit Today");
+useState("");
 
 
 
@@ -116,7 +116,6 @@ location.state
 ]);
 
 
-/* QR */
 
 const generateQR=
 async()=>{
@@ -157,10 +156,10 @@ setQrImage(
 
 }
 
-catch(err){
+catch(error){
 
 console.log(
-err
+error
 );
 
 }
@@ -177,8 +176,6 @@ false
 
 
 
-/* DOWNLOAD */
-
 const downloadQR=
 async()=>{
 
@@ -187,27 +184,36 @@ if(
 )
 return;
 
+try{
+
 const canvas=
+
 await html2canvas(
 
 qrDownloadRef.current,
 
 {
 
-scale:3,
+scale:4,
 
-useCORS:true
+useCORS:true,
+
+allowTaint:true,
+
+backgroundColor:null
 
 }
 
 );
 
 const image=
+
 canvas.toDataURL(
 "image/png"
 );
 
 const link=
+
 document.createElement(
 "a"
 );
@@ -216,9 +222,32 @@ link.href=
 image;
 
 link.download=
-`qr-${Date.now()}.png`;
+
+`qr-${
+Date.now()
+}.png`;
+
+document.body
+.appendChild(
+link
+);
 
 link.click();
+
+document.body
+.removeChild(
+link
+);
+
+}
+
+catch(error){
+
+console.log(
+error
+);
+
+}
 
 };
 
@@ -285,6 +314,7 @@ className=
 className=
 "qr-form">
 
+
 <div
 className=
 "input-group">
@@ -311,6 +341,7 @@ e.target.value
 />
 
 </div>
+
 
 
 <div
@@ -342,6 +373,7 @@ e.target.value
 />
 
 </div>
+
 
 
 <div
@@ -596,6 +628,7 @@ businessTitle
 }
 
 
+
 <div
 className=
 "qr-wrapper">
@@ -614,6 +647,9 @@ alt=
 
 className=
 "qr-image"
+
+crossOrigin=
+"anonymous"
 
 />
 
@@ -659,17 +695,6 @@ className=
 }
 
 </div>
-
-
-<p>
-
-{
-
-businessSubtitle
-
-}
-
-</p>
 
 </div>
 
