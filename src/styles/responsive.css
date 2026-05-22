@@ -1,0 +1,140 @@
+/* =========================
+   LARGE DEVICES
+========================= */
+
+@media (max-width: 1200px) {
+
+  .hero-content h1,
+  .pricing-header h1,
+  .templates-header h1,
+  .features-header h1,
+  .qr-generator-header h1 {
+    font-size: 52px;
+  }
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 992px) {
+
+  .hero-container,
+  .qr-generator-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-content {
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-buttons,
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .dashboard-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =========================
+   MOBILE DEVICES
+========================= */
+
+@media (max-width: 768px) {
+
+  section,
+  .hero-section,
+  .pricing-section,
+  .templates-section,
+  .features-section,
+  .qr-generator-section {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+
+  .hero-content h1,
+  .pricing-header h1,
+  .templates-header h1,
+  .features-header h1,
+  .qr-generator-header h1 {
+    font-size: 42px !important;
+  }
+
+  .hero-buttons,
+  .qr-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primary-btn,
+  .secondary-btn,
+  .generate-btn,
+  .download-btn {
+    width: 100%;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+  .hero-content h1,
+  .pricing-header h1,
+  .templates-header h1,
+  .features-header h1,
+  .qr-generator-header h1 {
+    font-size: 34px !important;
+  }
+
+  .hero-content p,
+  .pricing-header p,
+  .templates-header p,
+  .features-header p,
+  .qr-generator-header p {
+    font-size: 15px !important;
+  }
+
+  .hero-card,
+  .pricing-card,
+  .template-card,
+  .feature-card {
+    border-radius: 20px;
+  }
+
+  .navbar {
+    padding: 0 5% !important;
+  }
+
+  .dashboard-content {
+    padding: 20px !important;
+  }
+}

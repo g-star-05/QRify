@@ -1,0 +1,29 @@
+.dashboard-page{
+  width:100%;
+  min-height:100vh;
+
+  padding:40px 8%;
+
+  background:
+  linear-gradient(
+    to bottom right,
+    #f8fafc,
+    #e2e8f0
+  );
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .dashboard-page{
+    padding:30px 5%;
+  }
+}
+
+@media(max-width:500px){
+
+  .dashboard-page{
+    padding:25px 4%;
+  }
+}
