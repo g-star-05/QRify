@@ -1,70 +1,188 @@
-.email-template{
+/* ─── FULL PAGE WRAPPER ───────────────────────────── */
 
-max-width:500px;
-
-margin:auto;
-
-padding:30px;
-
-background:white;
-
-border-radius:24px;
-
-box-shadow:
-0 15px 40px rgba(0,0,0,.08);
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
+/* FIX: Added wrapper for full-page centering.
+   Original CSS had no page-level container so the
+   card was not centered on the screen. */
+.email-template-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
 }
 
-.email-template h1{
+/* ─── CARD ────────────────────────────────────────── */
 
-font-size:32px;
-
-font-weight:700;
-
-color:#020617;
+.email-template {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.email-template p{
+/* ─── HEADER ──────────────────────────────────────── */
 
-color:#64748b;
+.email-template-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.email-template input{
-
-padding:16px;
-
-border:2px solid #e2e8f0;
-
-border-radius:16px;
-
-font-size:16px;
-
-outline:none;
+.email-template h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #020617;
+  margin: 0;
 }
 
-.email-template input:focus{
-
-border-color:#38bdf8;
+.email-template p {
+  font-size: 15px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
 }
 
-.email-template button{
+/* ─── FIELD GROUP ─────────────────────────────────── */
 
-padding:16px;
+/* FIX: Added label + input wrapper for cleaner layout */
+.email-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-border:none;
+.email-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
 
-border-radius:18px;
+.email-field label span {
+  color: #ef4444;
+  margin-left: 2px;
+}
 
-background:#020617;
+/* ─── INPUTS ──────────────────────────────────────── */
 
-color:white;
+.email-template input,
+.email-template textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  color: #020617;
+  background: #fafafa;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+  resize: vertical;
+}
 
-font-weight:700;
+.email-template input:focus,
+.email-template textarea:focus {
+  border-color: #38bdf8;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+}
 
-cursor:pointer;
+/* ─── QR PREVIEW ──────────────────────────────────── */
+
+/* FIX: Added preview box — shows exactly what will be
+   encoded in the QR so user can verify before generating */
+.email-preview {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.email-preview span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.email-preview code {
+  font-size: 12px;
+  color: #0f172a;
+  word-break: break-all;
+  line-height: 1.6;
+  font-family: monospace;
+}
+
+/* ─── BUTTON ──────────────────────────────────────── */
+
+.email-template button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 18px;
+  background: #020617;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+}
+
+.email-template button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(2, 6, 23, 0.25);
+}
+
+/* FIX: Added disabled state — was missing from original */
+.email-template button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ─── RESPONSIVE: TABLET (≤ 768px) ───────────────── */
+
+@media (max-width: 768px) {
+  .email-template-wrapper {
+    padding: 40px 16px;
+    align-items: flex-start;
+  }
+
+  .email-template {
+    padding: 28px;
+  }
+
+  .email-template h1 {
+    font-size: 26px;
+  }
+}
+
+/* ─── RESPONSIVE: MOBILE (≤ 480px) ───────────────── */
+
+@media (max-width: 480px) {
+  .email-template {
+    padding: 22px;
+    border-radius: 20px;
+    gap: 16px;
+  }
+
+  .email-template h1 {
+    font-size: 22px;
+  }
+
+  .email-template input,
+  .email-template textarea {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
 }
