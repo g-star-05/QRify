@@ -39,17 +39,15 @@ className=
 
 <h1>
 
-Create Beautiful
+
 
 <span>
 
- QR Codes
+Create Beautiful QR Codes
 
 </span>
 
-For Business,
-Brands &
-Creators
+ ->For Business,Brands & Creators
 
 </h1>
 
