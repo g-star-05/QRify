@@ -4,40 +4,51 @@ min-height:100vh;
 
 display:flex;
 
-flex-direction:column;
-
 justify-content:center;
 
 align-items:center;
 
-padding:40px 20px;
+padding:80px 20px;
 
 background:
 
 linear-gradient(
 135deg,
 #f8fafc,
-#e2e8f0
+#eef2ff,
+#e0f2fe
 );
 
 }
 
 
+/* CARD */
+
 .audio-template-card{
 
 width:100%;
 
-max-width:550px;
-
-background:white;
+max-width:520px;
 
 padding:40px;
 
-border-radius:30px;
+background:
+
+rgba(
+255,
+255,
+255,
+0.75
+);
+
+backdrop-filter:
+blur(20px);
+
+border-radius:32px;
 
 box-shadow:
 
-0 20px 50px
+0 20px 60px
 
 rgba(
 0,
@@ -50,12 +61,14 @@ display:flex;
 
 flex-direction:column;
 
-gap:22px;
+gap:24px;
 
 }
 
 
-.audio-template h1{
+/* TITLE */
+
+.audio-template-card h1{
 
 font-size:36px;
 
@@ -65,77 +78,58 @@ color:#020617;
 
 margin:0;
 
-text-align:center;
-
 }
 
 
-.audio-template p{
-
-font-size:15px;
-
-color:#64748b;
-
-text-align:center;
-
-margin:0;
-
-}
-
-
-.audio-template input{
-
-width:100%;
-
-padding:18px;
-
-border:
-
-2px solid #e2e8f0;
-
-border-radius:18px;
+.audio-template-card p{
 
 font-size:16px;
 
-outline:none;
+color:#64748b;
 
-transition:.3s;
+margin:0;
 
-background:#fff;
-
-}
-
-
-.audio-template input:focus{
-
-border-color:#38bdf8;
-
-box-shadow:
-
-0 0 0 5px
-
-rgba(
-56,
-189,
-248,
-0.15
-);
+line-height:1.7;
 
 }
 
 
-.audio-template input[type="file"]{
+/* FILE INPUT */
 
-padding:14px;
+.audio-template-card input[type="file"]{
+
+padding:18px;
+
+border:2px dashed
+#cbd5e1;
+
+border-radius:20px;
+
+background:white;
 
 cursor:pointer;
 
-background:#f8fafc;
+font-size:15px;
+
+transition:.3s;
 
 }
 
 
-.audio-template button{
+.audio-template-card input[type="file"]:hover{
+
+border-color:
+#8b5cf6;
+
+background:
+#faf5ff;
+
+}
+
+
+/* BUTTON */
+
+.audio-template-card button{
 
 padding:18px;
 
@@ -143,83 +137,107 @@ border:none;
 
 border-radius:18px;
 
-background:
-
-linear-gradient(
-135deg,
-#0f172a,
-#1e293b
-);
-
-color:white;
-
 font-size:16px;
 
 font-weight:700;
 
 cursor:pointer;
 
+color:white;
+
+background:
+
+linear-gradient(
+135deg,
+#8b5cf6,
+#38bdf8
+);
+
+box-shadow:
+
+0 16px 35px
+
+rgba(
+139,
+92,
+246,
+0.25
+);
+
 transition:.3s;
 
 }
 
 
-.audio-template button:hover{
+.audio-template-card button:hover{
 
 transform:
 
 translateY(-4px);
 
-box-shadow:
-
-0 12px 25px
-
-rgba(
-15,
-23,
-42,
-0.25
-);
-
 }
 
 
+/* SELECTED FILE */
+
 .selected-file{
 
-padding:12px;
+padding:14px;
 
 border-radius:14px;
 
-background:#f1f5f9;
+background:
+#f8fafc;
 
 font-size:14px;
 
 color:#334155;
+
+font-weight:600;
 
 word-break:break-word;
 
 }
 
 
+/* RESPONSIVE */
+
 @media(max-width:768px){
 
 .audio-template{
 
-padding:20px;
+padding:50px 16px;
 
 }
 
 .audio-template-card{
 
-padding:25px;
+padding:28px;
+
+}
+
+.audio-template-card h1{
+
+font-size:28px;
+
+}
+
+}
+
+
+@media(max-width:500px){
+
+.audio-template-card{
+
+padding:22px;
 
 border-radius:24px;
 
 }
 
-.audio-template h1{
+.audio-template-card button{
 
-font-size:28px;
+width:100%;
 
 }
 
