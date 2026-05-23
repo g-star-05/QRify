@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import "./EmailTemplate.css";
 
 const EmailTemplate = () => {
@@ -21,7 +20,7 @@ const generateEmailQR = ()=>{
 if(!email){
 
 alert(
-"Enter Email Address"
+"Enter email"
 );
 
 return;
@@ -33,20 +32,13 @@ const emailQR =
 `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
 navigate(
-
 "/qr-generator",
-
 {
-
 state:{
-
 templateText:
 emailQR
-
 }
-
 }
-
 );
 
 };
@@ -60,12 +52,6 @@ return(
 Email QR
 
 </h1>
-
-<p>
-
-Create QR for email
-
-</p>
 
 <input
 
@@ -108,7 +94,7 @@ e.target.value
 <textarea
 
 placeholder=
-"Email Message"
+"Email Body"
 
 value={body}
 
@@ -120,9 +106,7 @@ e.target.value
 
 }
 
-rows="5"
-
-></textarea>
+/>
 
 <button
 onClick=
