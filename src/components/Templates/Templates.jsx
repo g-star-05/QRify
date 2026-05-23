@@ -1,10 +1,12 @@
 import "./Templates.css";
 
-import { useNavigate }
+import {
+useNavigate
+}
 
 from "react-router-dom";
 
-const Templates = () => {
+const Templates = ()=>{
 
 const navigate =
 useNavigate();
@@ -139,7 +141,7 @@ fields:[
 
 {
 label:
-"Email",
+"Recipient Email",
 
 type:
 "email",
@@ -157,6 +159,17 @@ type:
 
 name:
 "subject"
+},
+
+{
+label:
+"Body",
+
+type:
+"textarea",
+
+name:
+"body"
 }
 
 ]
@@ -184,6 +197,88 @@ type:
 
 name:
 "url"
+}
+
+]
+
+},
+
+{
+
+title:
+"Audio QR",
+
+category:
+"Media",
+
+icon:"🎵",
+
+fields:[
+
+{
+label:
+"Audio Title",
+
+type:
+"text",
+
+name:
+"title"
+},
+
+{
+label:
+"Upload Audio",
+
+type:
+"file",
+
+name:
+"audio",
+
+accept:
+"audio/*"
+}
+
+]
+
+},
+
+{
+
+title:
+"Photo QR",
+
+category:
+"Media",
+
+icon:"🖼️",
+
+fields:[
+
+{
+label:
+"Photo Caption",
+
+type:
+"text",
+
+name:
+"caption"
+},
+
+{
+label:
+"Upload Image",
+
+type:
+"file",
+
+name:
+"image",
+
+accept:
+"image/*"
 }
 
 ]
@@ -278,8 +373,46 @@ default:
 ];
 
 
-const openTemplate=
-(template)=>{
+const openTemplate = (template)=>{
+
+if(
+template.title ===
+"Email"
+){
+
+navigate(
+"/email-template"
+);
+
+return;
+
+}
+
+if(
+template.title ===
+"Audio QR"
+){
+
+navigate(
+"/audio-template"
+);
+
+return;
+
+}
+
+if(
+template.title ===
+"Photo QR"
+){
+
+navigate(
+"/photo-template"
+);
+
+return;
+
+}
 
 navigate(
 

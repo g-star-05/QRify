@@ -1,37 +1,19 @@
-import { useLocation }
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-from "react-router-dom";
-
-import {
-
-useState
-
-}
-
-from "react";
-
-import {
-
-useNavigate
-
-}
-
-from "react-router-dom";
+import axios from "axios";
 
 import "./TemplateForm.css";
 
 const TemplateForm = () => {
 
-const location =
-useLocation();
+const location = useLocation();
 
-const navigate =
-useNavigate();
+const navigate = useNavigate();
 
 const template =
-
-location.state
-?.template;
+location.state?.template;
 
 
 const [
@@ -40,64 +22,64 @@ formData,
 
 setFormData
 
-] =
-
-useState({});
+] = useState({});
 
 
-const handleChange=
-
+const handleChange =
 (e)=>{
+
+const {
+
+name,
+value,
+files,
+type
+
+} = e.target;
 
 setFormData({
 
 ...formData,
 
-[
+[ name ]:
 
-e.target
-.name
+type==="file"
 
-]:
+?
 
-e.target
-.value
+files[0]
+
+:
+
+value
 
 });
 
 };
 
 
-const generateQR=
-()=>{
 
-let qrText=
-"";
+const generateQR =
+async()=>{
+
+let qrText = "";
 
 
 switch(
-
-template
-.title
-
+template.title
 ){
 
+case "Phone Call":
 
-case
-"Phone Call":
+qrText =
 
-qrText=
-
-`tel:${
-formData.phone
-}`;
+`tel:${formData.phone}`;
 
 break;
 
 
 
-case
-"WhatsApp":
+case "WhatsApp":
 
 const fullNumber =
 
@@ -119,94 +101,48 @@ formData.phone
 
 }`
 
-.replace(
-"+",
-""
-)
+.replace("+","")
 
-.replace(
-/\s/g,
-""
-);
+.replace(/\s/g,"");
 
 
-qrText=
+qrText =
 
-`https://wa.me/${
-
-fullNumber
-
-}?text=${
-
-encodeURIComponent(
-
-formData.message
-
-||
-
-""
-
-)
-
-}`;
+`https://wa.me/${fullNumber}?text=${encodeURIComponent(formData.message||"")}`;
 
 break;
 
 
 
-case
-"WiFi":
+case "WiFi":
 
-qrText=
+qrText =
 
-`WIFI:S:${
-
-formData.ssid
-
-};T:WPA;P:${
-
-formData.password
-
-};;`;
+`WIFI:S:${formData.ssid};T:WPA;P:${formData.password};;`;
 
 break;
 
 
 
-case
-"Email":
+case "Email":
 
-qrText=
+qrText =
 
-`mailto:${
-
-formData.email
-
-}?subject=${
-
-formData.subject
-
-||
-
-""
-
-}`;
+`mailto:${formData.email}?subject=${encodeURIComponent(formData.subject||"")}&body=${encodeURIComponent(formData.body||"")}`;
 
 break;
 
 
 
-case
-"Website":
+case "Website":
 
 let site =
-
-formData.url
-?.trim();
-
+formData.url?.trim();
 
 if(
+
 site
+
 &&
 
 !site.startsWith(
@@ -221,15 +157,13 @@ site
 
 ){
 
-site=
+site =
 
 `https://${site}`;
 
 }
 
-
-qrText=
-
+qrText =
 site ||
 
 "https://google.com";
@@ -238,32 +172,108 @@ break;
 
 
 
-case
-"Business Card":
-
-
-let website =
-
-formData.url
-?.trim();
-
+case "Audio QR":
 
 if(
-!website
+!formData.audio
 ){
 
 alert(
-
-"Please enter website URL"
-
+"Upload audio"
 );
 
 return;
 
 }
 
+const audioForm =
+new FormData();
 
-/* AUTO HTTPS */
+audioForm.append(
+
+"file",
+
+formData.audio
+
+);
+
+const audioResponse =
+
+await axios.post(
+
+`${import.meta.env.VITE_API_URL}/media/upload-audio`,
+
+audioForm
+
+);
+
+qrText =
+
+`${import.meta.env.VITE_API_URL}${audioResponse.data.url}`;
+
+break;
+
+
+
+case "Photo QR":
+
+if(
+!formData.image
+){
+
+alert(
+"Upload image"
+);
+
+return;
+
+}
+
+const imageForm =
+new FormData();
+
+imageForm.append(
+
+"file",
+
+formData.image
+
+);
+
+const imageResponse =
+
+await axios.post(
+
+`${import.meta.env.VITE_API_URL}/media/upload-image`,
+
+imageForm
+
+);
+
+qrText =
+
+`${import.meta.env.VITE_API_URL}${imageResponse.data.url}`;
+
+break;
+
+
+
+case "Business Card":
+
+let website =
+formData.url?.trim();
+
+if(
+!website
+){
+
+alert(
+"Please enter website URL"
+);
+
+return;
+
+}
 
 if(
 
@@ -279,14 +289,11 @@ if(
 
 ){
 
-website=
+website =
 
 `https://${website}`;
 
 }
-
-
-/* GO TO QR PAGE */
 
 navigate(
 
@@ -297,13 +304,11 @@ navigate(
 state:{
 
 templateText:
-
 website,
 
 businessTitle:
 
-formData
-.businessName
+formData.businessName
 
 ||
 
@@ -313,11 +318,9 @@ formData.name
 
 "Business",
 
-
 businessSubtitle:
 
-formData
-.subtitle
+formData.subtitle
 
 ||
 
@@ -335,13 +338,10 @@ return;
 
 default:
 
-qrText=
-"";
+qrText="";
 
 }
 
-
-/* OTHER TEMPLATES */
 
 navigate(
 
@@ -385,28 +385,17 @@ Template not found
 
 return(
 
-<section
-className=
-"template-form-section">
+<section className="template-form-section">
 
-<div
-className=
-"template-form-card">
-
+<div className="template-form-card">
 
 <h1>
 
-{
+{template.icon}
 
-template.icon
+{" "}
 
-}
-
-{
-
-template.title
-
-}
+{template.title}
 
 QR
 
@@ -414,70 +403,72 @@ QR
 
 
 
-<div
-className=
-"template-fields">
-
+<div className="template-fields">
 
 {
 
-template.fields
-.map(
+template.fields.map(
 
 (field,index)=>(
 
 <div
 
-key=
-{index}
+key={index}
 
-className=
-"form-group"
+className="form-group"
 
 >
 
 <label>
 
-{
-
-field.label
-
-}
+{field.label}
 
 </label>
 
 
-<input
-
-type=
 {
 
-field.type
+field.type==="textarea"
 
-}
+?
 
-name=
-{
+(
 
-field.name
+<textarea
 
-}
+name={field.name}
 
-placeholder=
-{
+placeholder={field.label}
 
-field.label
+rows="5"
 
-}
-
-onChange=
-{
-
-handleChange
-
-}
+onChange={handleChange}
 
 />
+
+)
+
+:
+
+(
+
+<input
+
+type={field.type}
+
+name={field.name}
+
+accept={field.accept}
+
+placeholder={field.label}
+
+onChange={handleChange}
+
+/>
+
+)
+
+}
 
 </div>
 
@@ -486,7 +477,6 @@ handleChange
 )
 
 }
-
 
 </div>
 
@@ -494,22 +484,15 @@ handleChange
 
 <button
 
-className=
-"generate-template-btn"
+className="generate-template-btn"
 
-onClick=
-{
-
-generateQR
-
-}
+onClick={generateQR}
 
 >
 
 Generate QR
 
 </button>
-
 
 </div>
 

@@ -1,0 +1,70 @@
+.email-template{
+
+max-width:500px;
+
+margin:auto;
+
+padding:30px;
+
+background:white;
+
+border-radius:24px;
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.08);
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+}
+
+.email-template h1{
+
+font-size:32px;
+
+font-weight:700;
+
+color:#020617;
+}
+
+.email-template p{
+
+color:#64748b;
+}
+
+.email-template input{
+
+padding:16px;
+
+border:2px solid #e2e8f0;
+
+border-radius:16px;
+
+font-size:16px;
+
+outline:none;
+}
+
+.email-template input:focus{
+
+border-color:#38bdf8;
+}
+
+.email-template button{
+
+padding:16px;
+
+border:none;
+
+border-radius:18px;
+
+background:#020617;
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+}

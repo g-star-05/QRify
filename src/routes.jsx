@@ -3,154 +3,129 @@ import { Routes, Route } from "react-router-dom";
 /* PAGES */
 
 import Home from "./pages/Home";
-
 import LoginPage from "./pages/LoginPage";
-
 import SignupPage from "./pages/SignupPage";
-
 import PricingPage from "./pages/PricingPage";
-
 import DashboardPage from "./pages/DashboardPage";
-
 import TemplatesPage from "./pages/TemplatesPage";
-
 import FeaturesPage from "./pages/FeaturesPage";
-
 
 /* COMPONENTS */
 
-import TemplateForm
-from "./components/Templates/TemplateForm";
+import TemplateForm from "./components/Templates/TemplateForm";
 
-import QRGenerator
-from "./components/QRGenerator/QRGenerator";
+import QRGenerator from "./components/QRGenerator/QRGenerator";
 
+import EmailTemplate from "./components/Templates/EmailTemplate";
+
+import PhotoTemplate from "./components/Templates/PhotoTemplate";
+
+import AudioTemplate from "./components/Templates/AudioTemplate";
 
 const RoutesComponent = () => {
 
-  return (
+return(
 
-    <Routes>
+<Routes>
 
-      {/* HOME */}
+{/* HOME */}
 
-      <Route
-
-        path="/"
-
-        element={
-          <Home />
-        }
-
-      />
+<Route
+path="/"
+element={<Home/>}
+/>
 
 
-      {/* LOGIN */}
+{/* LOGIN */}
 
-      <Route
-
-        path="/login"
-
-        element={
-          <LoginPage />
-        }
-
-      />
+<Route
+path="/login"
+element={<LoginPage/>}
+/>
 
 
-      {/* SIGNUP */}
+{/* SIGNUP */}
 
-      <Route
-
-        path="/signup"
-
-        element={
-          <SignupPage />
-        }
-
-      />
+<Route
+path="/signup"
+element={<SignupPage/>}
+/>
 
 
-      {/* PRICING */}
+{/* PRICING */}
 
-      <Route
-
-        path="/pricing"
-
-        element={
-          <PricingPage />
-        }
-
-      />
+<Route
+path="/pricing"
+element={<PricingPage/>}
+/>
 
 
-      {/* DASHBOARD */}
+{/* DASHBOARD */}
 
-      <Route
-
-        path="/dashboard"
-
-        element={
-          <DashboardPage />
-        }
-
-      />
+<Route
+path="/dashboard"
+element={<DashboardPage/>}
+/>
 
 
-      {/* TEMPLATES */}
+{/* FEATURES */}
 
-      <Route
-
-        path="/templates"
-
-        element={
-          <TemplatesPage />
-        }
-
-      />
+<Route
+path="/features"
+element={<FeaturesPage/>}
+/>
 
 
-      {/* FEATURES */}
+{/* TEMPLATES */}
 
-      <Route
-
-        path="/features"
-
-        element={
-          <FeaturesPage />
-        }
-
-      />
+<Route
+path="/templates"
+element={<TemplatesPage/>}
+/>
 
 
-      {/* TEMPLATE FORM */}
+{/* TEMPLATE FORM */}
 
-      <Route
-
-        path="/template-form"
-
-        element={
-          <TemplateForm />
-        }
-
-      />
+<Route
+path="/template-form"
+element={<TemplateForm/>}
+/>
 
 
-      {/* QR GENERATOR */}
+{/* EMAIL TEMPLATE */}
 
-      <Route
+<Route
+path="/email-template"
+element={<EmailTemplate/>}
+/>
 
-        path="/qr-generator"
 
-        element={
-          <QRGenerator />
-        }
+{/* PHOTO TEMPLATE */}
 
-      />
+<Route
+path="/photo-template"
+element={<PhotoTemplate/>}
+/>
 
-    </Routes>
 
-  );
+{/* AUDIO TEMPLATE */}
+
+<Route
+path="/audio-template"
+element={<AudioTemplate/>}
+/>
+
+
+{/* QR GENERATOR */}
+
+<Route
+path="/qr-generator"
+element={<QRGenerator/>}
+/>
+
+</Routes>
+
+);
 
 };
 
