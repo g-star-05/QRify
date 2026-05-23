@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import "./AudioTemplate.css";
+
 const AudioTemplate = ()=>{
 
 const navigate =
@@ -14,8 +16,15 @@ useState(null);
 const generateAudioQR =
 async()=>{
 
-if(!audio)
+if(!audio){
+
+alert(
+"Select audio file"
+);
+
 return;
+
+}
 
 const form =
 new FormData();
@@ -26,7 +35,6 @@ audio
 );
 
 const res =
-
 await axios.post(
 
 `${import.meta.env.VITE_API_URL}/upload/`,
@@ -39,11 +47,8 @@ navigate(
 "/qr-generator",
 {
 state:{
-
 templateText:
-
-`${import.meta.env.VITE_API_URL}${res.data.url}`
-
+res.data.url
 }
 }
 );
@@ -52,7 +57,21 @@ templateText:
 
 return(
 
-<div>
+<div className="audio-template">
+
+<div className="audio-template-card">
+
+<h1>
+
+Audio QR
+
+</h1>
+
+<p>
+
+Upload audio and generate QR
+
+</p>
 
 <input
 
@@ -70,6 +89,20 @@ e.target.files[0]
 
 />
 
+{
+
+audio && (
+
+<div className="selected-file">
+
+{audio.name}
+
+</div>
+
+)
+
+}
+
 <button
 onClick=
 {generateAudioQR}
@@ -78,6 +111,8 @@ onClick=
 Generate QR
 
 </button>
+
+</div>
 
 </div>
 
