@@ -6,26 +6,13 @@ const EmailTemplate = () => {
 
 const navigate = useNavigate();
 
-const [email,setEmail] =
-useState("");
-
-const [subject,setSubject] =
-useState("");
-
-const [body,setBody] =
-useState("");
+const [email,setEmail] = useState("");
+const [subject,setSubject] = useState("");
+const [body,setBody] = useState("");
 
 const generateEmailQR = ()=>{
 
-if(!email){
-
-alert(
-"Enter email"
-);
-
-return;
-
-}
+if(!email) return;
 
 const emailQR =
 
@@ -35,8 +22,7 @@ navigate(
 "/qr-generator",
 {
 state:{
-templateText:
-emailQR
+templateText:emailQR
 }
 }
 );
@@ -47,71 +33,35 @@ return(
 
 <div className="email-template">
 
-<h1>
-
-Email QR
-
-</h1>
+<h1>Email QR</h1>
 
 <input
-
 type="email"
-
-placeholder=
-"example@gmail.com"
-
+placeholder="Email Address"
 value={email}
-
 onChange={(e)=>
-
-setEmail(
-e.target.value
-)
-
+setEmail(e.target.value)
 }
-
 />
 
 <input
-
 type="text"
-
-placeholder=
-"Subject"
-
+placeholder="Subject"
 value={subject}
-
 onChange={(e)=>
-
-setSubject(
-e.target.value
-)
-
+setSubject(e.target.value)
 }
-
 />
 
 <textarea
-
-placeholder=
-"Email Body"
-
+placeholder="Body"
 value={body}
-
 onChange={(e)=>
-
-setBody(
-e.target.value
-)
-
+setBody(e.target.value)
 }
-
 />
 
-<button
-onClick=
-{generateEmailQR}
->
+<button onClick={generateEmailQR}>
 
 Generate QR
 
