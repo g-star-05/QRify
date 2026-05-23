@@ -1,73 +1,164 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+import {
+useNavigate
+}
+from "react-router-dom";
+
 import "./EmailTemplate.css";
 
-const EmailTemplate = () => {
+const EmailTemplate = ()=>{
 
-const navigate = useNavigate();
+const navigate =
+useNavigate();
 
-const [email,setEmail] = useState("");
-const [subject,setSubject] = useState("");
-const [body,setBody] = useState("");
+const [email,
+setEmail] =
+useState("");
 
-const generateEmailQR = ()=>{
+const [subject,
+setSubject] =
+useState("");
 
-if(!email) return;
+const [body,
+setBody] =
+useState("");
 
-const emailQR =
+
+const generateEmailQR =
+()=>{
+
+if(
+!email
+)
+return;
+
+
+const emailText =
 
 `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+
 navigate(
+
 "/qr-generator",
+
 {
+
 state:{
-templateText:emailQR
+
+templateText:
+emailText
+
 }
+
 }
+
 );
 
 };
 
+
 return(
 
-<div className="email-template">
+<section
+className=
+"email-template">
 
-<h1>Email QR</h1>
+<h1>
+
+Email QR
+
+</h1>
+
+<p>
+
+Generate email QR code
+
+</p>
+
+
+<div
+className=
+"email-card">
 
 <input
-type="email"
-placeholder="Email Address"
-value={email}
+
+type=
+"email"
+
+placeholder=
+"Enter Email"
+
+value=
+{email}
+
 onChange={(e)=>
-setEmail(e.target.value)
+
+setEmail(
+e.target.value
+)
+
 }
+
 />
 
+
 <input
-type="text"
-placeholder="Subject"
-value={subject}
+
+type=
+"text"
+
+placeholder=
+"Subject"
+
+value=
+{subject}
+
 onChange={(e)=>
-setSubject(e.target.value)
+
+setSubject(
+e.target.value
+)
+
 }
+
 />
+
 
 <textarea
-placeholder="Body"
-value={body}
+
+placeholder=
+"Message"
+
+value=
+{body}
+
 onChange={(e)=>
-setBody(e.target.value)
+
+setBody(
+e.target.value
+)
+
 }
+
 />
 
-<button onClick={generateEmailQR}>
+
+<button
+
+onClick=
+{generateEmailQR}
+
+>
 
 Generate QR
 
 </button>
 
 </div>
+
+</section>
 
 );
 
