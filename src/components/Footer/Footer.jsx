@@ -112,7 +112,7 @@ Templates
 
 <Link
 to=
-"/features">
+"/Features">
 
 Features
 
